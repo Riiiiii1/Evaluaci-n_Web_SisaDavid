@@ -1,0 +1,28 @@
+<app-hero></app-hero>
+@if (countriesResource.isLoading()) {
+  <p>Cargando países...</p>
+}
+@if (countriesResource.error()) {
+  <p>Error al cargar los países</p>
+}
+@if (countriesResource.value(); as countries) {
+  <div class="grid">
+    @for (country of countries; track country.name.common) {
+
+      <div class="card">
+        <img
+          [src]="country.flags.png"
+          [alt]="country.flags.alt"
+          width="80"
+        />
+
+        <h3>{{ country.name.common }}</h3>
+
+        <p>
+          Capital: {{ country.capital?.[0] || 'NADA' }}
+        </p>
+      </div>
+
+    }
+  </div>
+}
